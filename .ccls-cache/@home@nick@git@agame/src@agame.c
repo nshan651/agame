@@ -14,9 +14,9 @@ int main(void)
 
     // NOTE: Be careful, background width must be equal or bigger than screen width
     // if not, texture should be draw more than two times for scrolling effect
-    Texture2D background = LoadTexture("resources/galactic-rowboat.png");
-    Texture2D midground = LoadTexture("resources/floating-island.jpg");
-    Texture2D foreground = LoadTexture("resources/floating-island.png");
+    Texture2D background = LoadTexture("resources/background.png");
+    /* Texture2D midground = LoadTexture("resources/floating-island.jpg"); */
+    Texture2D foreground = LoadTexture("resources/background.png");
 
     float scrollingBack = 0.0f;
     float scrollingMid = 0.0f;
@@ -36,7 +36,7 @@ int main(void)
 
         // NOTE: Texture is scaled twice its size, so it sould be considered on scrolling
         if (scrollingBack <= -background.width*2) scrollingBack = 0;
-        if (scrollingMid <= -midground.width*2) scrollingMid = 0;
+        /* if (scrollingMid <= -midground.width*2) scrollingMid = 0; */
         if (scrollingFore <= -foreground.width*2) scrollingFore = 0;
         //----------------------------------------------------------------------------------
 
@@ -49,15 +49,15 @@ int main(void)
             // Draw background image twice
             // NOTE: Texture is scaled twice its size
             DrawTextureEx(background, (Vector2){ scrollingBack, 20 }, 0.0f, 2.0f, WHITE);
-            DrawTextureEx(background, (Vector2){ background.width*2 + scrollingBack, 20 }, 0.0f, 2.0f, WHITE);
+            DrawTextureEx(background, (Vector2){ background.width + scrollingBack, 20 }, 0.0f, 2.0f, WHITE);
 
             // Draw midground image twice
-            DrawTextureEx(midground, (Vector2){ scrollingMid, 20 }, 0.0f, 2.0f, WHITE);
-            DrawTextureEx(midground, (Vector2){ midground.width*0.5 + scrollingMid, 20 }, 0.0f, 2.0f, WHITE);
+            /* DrawTextureEx(midground, (Vector2){ scrollingMid, 20 }, 0.0f, 2.0f, WHITE); */
+            /* DrawTextureEx(midground, (Vector2){ midground.width*0.5 + scrollingMid, 20 }, 0.0f, 2.0f, WHITE); */
 
             // Draw foreground image twice
             DrawTextureEx(foreground, (Vector2){ scrollingFore, 70 }, 0.0f, 2.0f, WHITE);
-            DrawTextureEx(foreground, (Vector2){ foreground.width*0.5 + scrollingFore, 70 }, 0.0f, 2.0f, WHITE);
+            DrawTextureEx(foreground, (Vector2){ foreground.width + scrollingFore, 70 }, 0.0f, 2.0f, WHITE);
 
             DrawText("BACKGROUND SCROLLING & PARALLAX", 10, 10, 20, RED);
             DrawText("Moebius Art", screenWidth - 330, screenHeight - 20, 10, RAYWHITE);
@@ -69,7 +69,7 @@ int main(void)
     // De-Initialization
     //--------------------------------------------------------------------------------------
     UnloadTexture(background);  // Unload background texture
-    UnloadTexture(midground);   // Unload midground texture
+    /* UnloadTexture(midground);   // Unload midground texture */
     UnloadTexture(foreground);  // Unload foreground texture
 
     CloseWindow();              // Close window and OpenGL context
